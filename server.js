@@ -28,14 +28,21 @@ wss.on("connection", (ws) => {
     }))
 
     ws.on("message", (data) => {
-
-        const msg = JSON.parse(data)
+        const msg = JSON.parse(data);
 
         if (msg.type === "click") {
-            counter++
-            broadcast()
+            counter++;
+            broadcast();
+        } 
+
+        else if (msg.type === "reset") {
+            counter = 0;
+            broadcast();
         }
-    })
+
+    });
 })
+
+
 
 console.log("WebSocket server running on port", port)
